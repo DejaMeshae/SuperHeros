@@ -10,19 +10,29 @@ namespace SuperHerosProject.Controllers
     public class SuperherosController : Controller
     {   //member variable
         ApplicationDbContext context;
+
         //constructor
         public SuperherosController()
         {
             context = new ApplicationDbContext();
         }
+
+
         // GET: Superheros**method/actions
         public ActionResult Index()
         {
-            return View(); 
-        }
+            //display all superheros in a list 
+            //.ToList();
+            Superheros superheros = new Superheros();
+            //List<Heros> Heros = Heros.ToList();//trying to display a list of superheros
+            //list the database not only object
+            //THOUGHT IT WOULD BE SIMILAR var superheroById = context.Heros.Where(h => h.Id == id).FirstOrDefault();         
+            return View(superheros);
 
-        // GET: Superheros/Details/5
-        public ActionResult Details(int id)
+    }
+
+    // GET: Superheros/Details/5
+    public ActionResult Details(int id)
         {
             return View();
         }
@@ -52,18 +62,26 @@ namespace SuperHerosProject.Controllers
         }
 
         // GET: Superheros/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id)//DONE maybe?
         {
-            return View();
+            //query db by id(pk) so the user can pick which superhero to update/edit
+            var superheroById = context.Heros.Where(h => h.Id == id).FirstOrDefault(); //dont have to do h.Superheros.Id        
+            return View(superheroById);//then pass to the view, that one superhero and all of their info
         }
 
         // POST: Superheros/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(Superheros superhero)
         {
             try
             {
                 // TODO: Add update logic here
+                //query by id (primary key) again to grab all of that superhero info
+                //var superheroById = context.Heros.Where(h => h.Id == id).FirstOrDefault(); //dont have to do h.Superheros.Id        
+
+                //then update it
+                //context.SaveChanges(); or submit on changes? 
+
 
                 return RedirectToAction("Index");
             }
@@ -81,7 +99,7 @@ namespace SuperHerosProject.Controllers
 
         // POST: Superheros/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id, Superheros superhero)
         {
             try
             {
