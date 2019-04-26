@@ -114,18 +114,5 @@ namespace SuperHerosProject.Controllers
             }
         }
 
-        public ActionResult Read()
-        {
-            Superheros superheros = new Superheros();
-
-            db.Heros.Where(s => s.name == superheros.name);
-            db.Heros.Where(s => s.alterEgo == superheros.alterEgo);
-            db.Heros.Where(s => s.primarySuperheroAbility == superheros.primarySuperheroAbility);
-            db.Heros.Where(s => s.secondarySuperHeroAbility == superheros.secondarySuperHeroAbility);
-            db.Heros.Where(s => s.catchPhrase == superheros.catchPhrase);
-            return View();
-        }
-
-
     }
 }
