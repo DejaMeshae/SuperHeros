@@ -8,10 +8,7 @@ namespace SuperHerosProject.Models
 {
     public class Superheros
     {
-        public class SuperherosIn
-        {
             [Key]
-
             public int Id { get; set; } //represents Primary Key
 
             public string name { get; set; }
@@ -19,9 +16,6 @@ namespace SuperHerosProject.Models
             public string primarySuperheroAbility { get; set; }
             public string secondarySuperHeroAbility { get; set; }
             public string catchPhrase { get; set; }
-
-        }
     }
 
-}
 }
