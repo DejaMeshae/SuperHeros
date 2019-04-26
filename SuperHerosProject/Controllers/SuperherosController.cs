@@ -6,37 +6,30 @@ using System.Web;
 using System.Web.Mvc;
 
 namespace SuperHerosProject.Controllers
-{   //think of these as class
+{  
     public class SuperherosController : Controller
-    {   //member variable
+    {   
         ApplicationDbContext db;
-
-        //constructor
+      
         public SuperherosController()
         {
             db = new ApplicationDbContext();
         }
 
-
-        // GET: Superheros**method/actions
-        public ActionResult Index()
+        // GET: Superheros
+        public ActionResult Index() //DONE
         {
-            return View();
-
-    }
+            //display list of superheros
+            var listOfSuperHeros = db.Heros.ToList();
+            return View(listOfSuperHeros);
+        }
 
     // GET: Superheros/Details/5
-    public ActionResult Details()
+    public ActionResult Details(int id) //READ
         {
-            //var superheroList = db.Heros.Where(h => h.Id == id).FirstOrDefault(); //?Only returns 1
-            Superheros superheros = new Superheros();
-
-            db.Heros.Where(s => s.name == superheros.name);
-            db.Heros.Where(s => s.alterEgo == superheros.alterEgo);
-            db.Heros.Where(s => s.primarySuperheroAbility == superheros.primarySuperheroAbility);
-            db.Heros.Where(s => s.secondarySuperHeroAbility == superheros.secondarySuperHeroAbility);
-            db.Heros.Where(s => s.catchPhrase == superheros.catchPhrase);
-            return View(superheros);
+            //display all names but click on one and display all of their properties 
+            var superHeroList = db.Heros.Where(h => h.Id == id);  
+            return View(superHeroList);
         }
 
         // GET: Superheros/Create
@@ -75,20 +68,19 @@ namespace SuperHerosProject.Controllers
 
         // POST: Superheros/Edit/5
         [HttpPost]
-        public ActionResult Edit(Superheros superhero) //DONE maybe?
+        public ActionResult Edit(Superheros superhero) 
         {
             try
             {
                 //query by id (primary key) again to grab all of that superhero info
-                db.Heros.Where(h => h.Id == superhero.Id).SingleOrDefault();
-                
-                //then update it
-                db.Heros.Where(s => s.name == superhero.name);
-                db.Heros.Where(s => s.alterEgo == superhero.alterEgo);
-                db.Heros.Where(s => s.primarySuperheroAbility == superhero.primarySuperheroAbility);
-                db.Heros.Where(s => s.secondarySuperHeroAbility == superhero.secondarySuperHeroAbility);
-                db.Heros.Where(s => s.catchPhrase == superhero.catchPhrase);        
-                db.SaveChanges(); //or submitOnChanges?           
+                var superheroToEdit = db.Heros.Where(h => h.Id == superhero.Id).SingleOrDefault();
+
+                superheroToEdit.name = superhero.name;
+                superheroToEdit.alterEgo = superhero.alterEgo;
+                superheroToEdit.primarySuperheroAbility = superhero.primarySuperheroAbility;
+                superheroToEdit.secondarySuperHeroAbility = superhero.secondarySuperHeroAbility;
+                superheroToEdit.catchPhrase = superhero.catchPhrase;
+                db.SaveChanges();          
                 return RedirectToAction("Index");
             }
             catch
@@ -100,8 +92,8 @@ namespace SuperHerosProject.Controllers
         // GET: Superheros/Delete/5
         public ActionResult Delete(int id)
         {
-            var superheroById = db.Heros.Where(h => h.Id == id).FirstOrDefault();
-            return View();
+            var superheroToDelete = db.Heros.Where(h => h.Id == id).FirstOrDefault();
+            return View(superheroToDelete);
         }
 
         // POST: Superheros/Delete/5
@@ -110,13 +102,10 @@ namespace SuperHerosProject.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
-                db.Heros.Where(s => s.name == superhero.name);
-                db.Heros.Where(s => s.alterEgo == superhero.alterEgo);
-                db.Heros.Where(s => s.primarySuperheroAbility == superhero.primarySuperheroAbility);
-                db.Heros.Where(s => s.secondarySuperHeroAbility == superhero.secondarySuperHeroAbility);
-                db.Heros.Where(s => s.catchPhrase == superhero.catchPhrase);
-                db.SaveChanges(); //or submitOnChanges?           
+                var superheroToDelete = db.Heros.Where(h => h.Id == superhero.Id).SingleOrDefault();
+
+                db.Heros.Remove(superheroToDelete); //adds the superheros object to the hereos table in the database
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
@@ -124,5 +113,19 @@ namespace SuperHerosProject.Controllers
                 return View();
             }
         }
+
+        public ActionResult Read()
+        {
+            Superheros superheros = new Superheros();
+
+            db.Heros.Where(s => s.name == superheros.name);
+            db.Heros.Where(s => s.alterEgo == superheros.alterEgo);
+            db.Heros.Where(s => s.primarySuperheroAbility == superheros.primarySuperheroAbility);
+            db.Heros.Where(s => s.secondarySuperHeroAbility == superheros.secondarySuperHeroAbility);
+            db.Heros.Where(s => s.catchPhrase == superheros.catchPhrase);
+            return View();
+        }
+
+
     }
 }
