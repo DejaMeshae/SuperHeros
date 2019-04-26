@@ -53,7 +53,7 @@ namespace SuperHerosProject.Controllers
                 // TODO: Add insert logic here that add this object to the database
                 context.Heros.Add(superheros); //adds the superheros object to the hereos table in the database
                 context.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index"); //After i create a superhero go to index page that displays list of superheros when i finish that logic
             }
             catch
             {
@@ -65,7 +65,8 @@ namespace SuperHerosProject.Controllers
         public ActionResult Edit(int id)//DONE maybe?
         {
             //query db by id(pk) so the user can pick which superhero to update/edit
-            var superheroById = context.Heros.Where(h => h.Id == id).FirstOrDefault(); //dont have to do h.Superheros.Id        
+            //var superheroById = context.Heros.Find(id); //2nd way to do it  
+            var superheroById = context.Heros.Where(h => h.Id == id).FirstOrDefault();      
             return View(superheroById);//then pass to the view, that one superhero and all of their info
         }
 
@@ -77,12 +78,16 @@ namespace SuperHerosProject.Controllers
             {
                 // TODO: Add update logic here
                 //query by id (primary key) again to grab all of that superhero info
-                //var superheroById = context.Heros.Where(h => h.Id == id).FirstOrDefault(); //dont have to do h.Superheros.Id        
+                //var superheroById = context.Heros.Find(superhero.Id);
 
+                var superheroByIdFromDb = context.Heros.Where(h => h.Id == superhero.Id).SingleOrDefault(); //dont have to do h.Superheros.Id        
                 //then update it
-                //context.SaveChanges(); or submit on changes? 
-
-
+                superheroByIdFromDb.name = superhero.name;
+                superheroByIdFromDb.alterEgo = superhero.alterEgo;
+                superheroByIdFromDb.primarySuperheroAbility = superhero.primarySuperheroAbility;
+                superheroByIdFromDb.secondarySuperHeroAbility = superhero.secondarySuperHeroAbility;
+                superheroByIdFromDb.catchPhrase = superhero.catchPhrase;         
+                context.SaveChanges(); //or submitOnChanges?           
                 return RedirectToAction("Index");
             }
             catch

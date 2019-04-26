@@ -31,5 +31,10 @@ namespace SuperHerosProject.Models
         {
             return new ApplicationDbContext();
         }
+
+        public static ApplicationDbContext Edit()
+        {
+            return new ApplicationDbContext();
+        }
     }
 }
