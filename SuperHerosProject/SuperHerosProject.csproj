@@ -251,6 +251,7 @@
     <Content Include="Views\Superheros\Create.cshtml" />
     <Content Include="Views\Superheros\Edit.cshtml" />
     <Content Include="Views\Superheros\Index.cshtml" />
+    <Content Include="Views\Superheros\Read.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

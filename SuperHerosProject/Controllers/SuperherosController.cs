@@ -9,32 +9,34 @@ namespace SuperHerosProject.Controllers
 {   //think of these as class
     public class SuperherosController : Controller
     {   //member variable
-        ApplicationDbContext context;
+        ApplicationDbContext db;
 
         //constructor
         public SuperherosController()
         {
-            context = new ApplicationDbContext();
+            db = new ApplicationDbContext();
         }
 
 
         // GET: Superheros**method/actions
         public ActionResult Index()
         {
-            //display all superheros in a list 
-            //.ToList();
-            Superheros superheros = new Superheros();
-            //List<Heros> Heros = Heros.ToList();//trying to display a list of superheros
-            //list the database not only object
-            //THOUGHT IT WOULD BE SIMILAR var superheroById = context.Heros.Where(h => h.Id == id).FirstOrDefault();         
-            return View(superheros);
+            return View();
 
     }
 
     // GET: Superheros/Details/5
-    public ActionResult Details(int id)
+    public ActionResult Details()
         {
-            return View();
+            //var superheroList = db.Heros.Where(h => h.Id == id).FirstOrDefault(); //?Only returns 1
+            Superheros superheros = new Superheros();
+
+            db.Heros.Where(s => s.name == superheros.name);
+            db.Heros.Where(s => s.alterEgo == superheros.alterEgo);
+            db.Heros.Where(s => s.primarySuperheroAbility == superheros.primarySuperheroAbility);
+            db.Heros.Where(s => s.secondarySuperHeroAbility == superheros.secondarySuperHeroAbility);
+            db.Heros.Where(s => s.catchPhrase == superheros.catchPhrase);
+            return View(superheros);
         }
 
         // GET: Superheros/Create
@@ -51,8 +53,8 @@ namespace SuperHerosProject.Controllers
             try
             {
                 // TODO: Add insert logic here that add this object to the database
-                context.Heros.Add(superheros); //adds the superheros object to the hereos table in the database
-                context.SaveChanges();
+                db.Heros.Add(superheros); //adds the superheros object to the hereos table in the database
+                db.SaveChanges();
                 return RedirectToAction("Index"); //After i create a superhero go to index page that displays list of superheros when i finish that logic
             }
             catch
@@ -64,30 +66,29 @@ namespace SuperHerosProject.Controllers
         // GET: Superheros/Edit/5
         public ActionResult Edit(int id)//DONE maybe?
         {
-            //query db by id(pk) so the user can pick which superhero to update/edit
-            //var superheroById = context.Heros.Find(id); //2nd way to do it  
-            var superheroById = context.Heros.Where(h => h.Id == id).FirstOrDefault();      
-            return View(superheroById);//then pass to the view, that one superhero and all of their info
+            //query db by id(pk) so the user can pick which superhero to update/edit. var superheroById = context.Heros.Find(id); 2nd way to do it  
+
+            var superheroToEdit = db.Heros.Where(h => h.Id == id).FirstOrDefault();      
+            return View(superheroToEdit);//then pass to the view, that one superhero and all of their info
         }
+
 
         // POST: Superheros/Edit/5
         [HttpPost]
-        public ActionResult Edit(Superheros superhero)
+        public ActionResult Edit(Superheros superhero) //DONE maybe?
         {
             try
             {
-                // TODO: Add update logic here
                 //query by id (primary key) again to grab all of that superhero info
-                //var superheroById = context.Heros.Find(superhero.Id);
-
-                var superheroByIdFromDb = context.Heros.Where(h => h.Id == superhero.Id).SingleOrDefault(); //dont have to do h.Superheros.Id        
+                db.Heros.Where(h => h.Id == superhero.Id).SingleOrDefault();
+                
                 //then update it
-                superheroByIdFromDb.name = superhero.name;
-                superheroByIdFromDb.alterEgo = superhero.alterEgo;
-                superheroByIdFromDb.primarySuperheroAbility = superhero.primarySuperheroAbility;
-                superheroByIdFromDb.secondarySuperHeroAbility = superhero.secondarySuperHeroAbility;
-                superheroByIdFromDb.catchPhrase = superhero.catchPhrase;         
-                context.SaveChanges(); //or submitOnChanges?           
+                db.Heros.Where(s => s.name == superhero.name);
+                db.Heros.Where(s => s.alterEgo == superhero.alterEgo);
+                db.Heros.Where(s => s.primarySuperheroAbility == superhero.primarySuperheroAbility);
+                db.Heros.Where(s => s.secondarySuperHeroAbility == superhero.secondarySuperHeroAbility);
+                db.Heros.Where(s => s.catchPhrase == superhero.catchPhrase);        
+                db.SaveChanges(); //or submitOnChanges?           
                 return RedirectToAction("Index");
             }
             catch
@@ -99,17 +100,23 @@ namespace SuperHerosProject.Controllers
         // GET: Superheros/Delete/5
         public ActionResult Delete(int id)
         {
+            var superheroById = db.Heros.Where(h => h.Id == id).FirstOrDefault();
             return View();
         }
 
         // POST: Superheros/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, Superheros superhero)
+        public ActionResult Delete(Superheros superhero)
         {
             try
             {
                 // TODO: Add delete logic here
-
+                db.Heros.Where(s => s.name == superhero.name);
+                db.Heros.Where(s => s.alterEgo == superhero.alterEgo);
+                db.Heros.Where(s => s.primarySuperheroAbility == superhero.primarySuperheroAbility);
+                db.Heros.Where(s => s.secondarySuperHeroAbility == superhero.secondarySuperHeroAbility);
+                db.Heros.Where(s => s.catchPhrase == superhero.catchPhrase);
+                db.SaveChanges(); //or submitOnChanges?           
                 return RedirectToAction("Index");
             }
             catch

@@ -36,5 +36,15 @@ namespace SuperHerosProject.Models
         {
             return new ApplicationDbContext();
         }
+
+        public static ApplicationDbContext Read()
+        {
+            return new ApplicationDbContext();
+        }
+
+        public static ApplicationDbContext Delete()
+        {
+            return new ApplicationDbContext();
+        }
     }
 }
