@@ -75,11 +75,11 @@ namespace SuperHerosProject.Controllers
                 //query by id (primary key) again to grab all of that superhero info
                 var superheroToEdit = db.Heros.Where(h => h.Id == superheros.Id).SingleOrDefault();
 
-                superheroToEdit.name = superheros.name;
-                superheroToEdit.alterEgo = superheros.alterEgo;
-                superheroToEdit.primarySuperheroAbility = superheros.primarySuperheroAbility;
-                superheroToEdit.secondarySuperHeroAbility = superheros.secondarySuperHeroAbility;
-                superheroToEdit.catchPhrase = superheros.catchPhrase;
+                superheroToEdit.Name = superheros.Name;
+                superheroToEdit.AlterEgo = superheros.AlterEgo;
+                superheroToEdit.PrimarySuperheroAbility = superheros.PrimarySuperheroAbility;
+                superheroToEdit.SecondarySuperHeroAbility = superheros.SecondarySuperHeroAbility;
+                superheroToEdit.CatchPhrase = superheros.CatchPhrase;
                 db.SaveChanges();          
                 return RedirectToAction("Index");
             }

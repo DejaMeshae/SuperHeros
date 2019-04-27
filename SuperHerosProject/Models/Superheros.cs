@@ -11,11 +11,11 @@ namespace SuperHerosProject.Models
             [Key]
             public int Id { get; set; } //represents Primary Key
 
-            public string name { get; set; }
-            public string alterEgo { get; set; }
-            public string primarySuperheroAbility { get; set; }
-            public string secondarySuperHeroAbility { get; set; }
-            public string catchPhrase { get; set; }
+            public string Name { get; set; }
+            public string AlterEgo { get; set; }
+            public string PrimarySuperheroAbility { get; set; }
+            public string SecondarySuperHeroAbility { get; set; }
+            public string CatchPhrase { get; set; }
     }
 
 }

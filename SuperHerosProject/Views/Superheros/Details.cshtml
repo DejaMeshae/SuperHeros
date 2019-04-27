@@ -12,19 +12,19 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.name)
+            @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.alterEgo)
+            @Html.DisplayNameFor(model => model.AlterEgo)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.primarySuperheroAbility)
+            @Html.DisplayNameFor(model => model.PrimarySuperheroAbility)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.secondarySuperHeroAbility)
+            @Html.DisplayNameFor(model => model.SecondarySuperHeroAbility)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.catchPhrase)
+            @Html.DisplayNameFor(model => model.CatchPhrase)
         </th>
         <th></th>
     </tr>
@@ -32,19 +32,19 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.name)
+            @Html.DisplayFor(modelItem => item.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.alterEgo)
+            @Html.DisplayFor(modelItem => item.AlterEgo)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.primarySuperheroAbility)
+            @Html.DisplayFor(modelItem => item.PrimarySuperheroAbility)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.secondarySuperHeroAbility)
+            @Html.DisplayFor(modelItem => item.SecondarySuperHeroAbility)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.catchPhrase)
+            @Html.DisplayFor(modelItem => item.CatchPhrase)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
