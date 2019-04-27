@@ -193,6 +193,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-readable.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -251,7 +252,6 @@
     <Content Include="Views\Superheros\Create.cshtml" />
     <Content Include="Views\Superheros\Edit.cshtml" />
     <Content Include="Views\Superheros\Index.cshtml" />
-    <Content Include="Views\Superheros\Read.cshtml" />
     <Content Include="Views\Superheros\Delete.cshtml" />
     <Content Include="Views\Superheros\Details.cshtml" />
   </ItemGroup>
